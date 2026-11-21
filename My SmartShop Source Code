@@ -1,0 +1,57 @@
+Daftar_Barang = {"Aqua":5000,"Roti":2000,"Biskuit":3000}
+for daftar_barang,harga in Daftar_Barang.items():
+    print(f'- {daftar_barang} = {harga}')
+
+def subtotal(aqua,roti,biskuit):
+    Masih_Ada = "Ya"
+    Total = int(0)
+           
+    while Masih_Ada.capitalize() == "Ya":   
+        Barang = str(input('Nama Barang [aqua,biskuit,roti]').lower())
+
+        if Barang.lower() == "aqua":
+            Kuantitas = int(input("Jumlah "))
+            Total_aqua = Kuantitas*aqua
+            Total += Total_aqua
+            
+
+        elif Barang.lower() == "roti":
+            Kuantitas = int(input("Jumlah "))
+            Total_roti = Kuantitas*roti
+            Total += Total_roti
+            
+        elif Barang.lower() == "biskuit":
+            Kuantitas = int(input("Jumlah "))
+            Total_biskuit = Kuantitas*biskuit
+            Total += Total_biskuit
+        else:
+            print('== Barang Tidak Tersedia ==')
+            Masih_Ada = input("Apakah masih ada? [Ya/Tidak]")
+                
+            continue
+
+        Masih_Ada = input("Apakah masih ada? [Ya/Tidak]")
+    
+    print(f'Total = Rp{Total}')    
+    return Total
+    
+
+def diskon(Total):
+    discount = 1/10
+    if Total > 100000:
+        Total_Discount = int(Total-(Total*discount))
+    else:
+        Total_Discount = Total
+    
+    print(f'== After DISCOUNT = Rp{Total_Discount}')
+    return Total_Discount
+
+
+
+def pajak(Total_Discount):
+    tax = 11/100
+    Total_Tax = int(Total_Discount+(Total_Discount*tax))
+    print(f'== After TAX = Rp{Total_Tax}')
+    return Total_Tax
+
+pajak(diskon(subtotal(Daftar_Barang["Aqua"],Daftar_Barang["Biskuit"],Daftar_Barang["Roti"])))
